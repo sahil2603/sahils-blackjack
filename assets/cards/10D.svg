@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect x="6" y="6" width="388" height="588" rx="28" ry="28" fill="#ffffff" stroke="#dcdcdc" />
+  <text x="34" y="84" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="56">10</text>
+  <text x="34" y="128" font-family="DejaVu Sans" font-weight="700" fill="#d12b3a" font-size="48">♦</text>
+  <text x="120" y="110" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="280" y="110" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="120" y="200" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="280" y="200" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="120" y="290" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="280" y="290" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="120" y="380" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="280" y="380" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="120" y="470" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+  <text x="280" y="470" font-family="DejaVu Sans" font-weight="800" fill="#d12b3a" font-size="48" text-anchor="middle">♦</text>
+</svg>

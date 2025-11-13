@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sahil's Blackjack — Classic Casino Edition</title>
+
+<!-- External CSS -->
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div>
+    <h1>Sahil's Blackjack</h1>
+    <small>Classic Poker Deck • Real Casino Chips • Insurance</small>
+  </div>
+
+  <div class="meta">
+    <div>Bankroll: ₹<span id="bankroll">1000</span></div>
+    <div>Bet: ₹<span id="currentBet">0</span></div>
+  </div>
+</header>
+
+
+<div class="table">
+
+  <!-- LEFT: GAME AREA -->
+  <div class="play-area">
+
+    <!-- Dealer -->
+    <div class="panel">
+      <div class="area-title">Dealer</div>
+      <div id="dealerCards" class="cards dealer-cards"></div>
+      <div id="dealerTotal" class="message">Total: —</div>
+    </div>
+
+    <div style="height:18px;"></div>
+
+    <!-- Player -->
+    <div class="panel">
+      <div class="area-title">Player</div>
+
+      <div id="playerHands" class="hands"></div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button id="dealBtn" class="primary">Deal</button>
+        <button id="hitBtn" disabled>Hit</button>
+        <button id="standBtn" disabled>Stand</button>
+        <button id="doubleBtn" disabled>Double</button>
+        <button id="splitBtn" disabled>Split</button>
+        <button id="insuranceBtn" disabled>Insurance</button>
+        <button id="clearBtn">Clear Bet</button>
+        <button id="newBtn">New Round</button>
+      </div>
+
+      <div class="message" id="message">Place a bet to begin.</div>
+    </div>
+
+  </div>
+
+
+
+  <!-- RIGHT: BETTING PANEL -->
+  <div class="right-col">
+
+    <div class="bet-panel">
+
+      <div class="area-title">Chips (Drag or Click)</div>
+
+      <div class="chips">
+        <div class="chip" data-value="10" 
+             style="background-image:url('assets/chips/chip-10.png')"></div>
+
+        <div class="chip" data-value="50" 
+             style="background-image:url('assets/chips/chip-50.png')"></div>
+
+        <div class="chip" data-value="100" 
+             style="background-image:url('assets/chips/chip-100.png')"></div>
+
+        <div class="chip" data-value="500" 
+             style="background-image:url('assets/chips/chip-500.png')"></div>
+      </div>
+
+      <div class="area-title" style="margin-top:12px;">Bet Area</div>
+
+      <div id="betZone" class="dropzone">Drop chips here</div>
+
+      <div class="bet-display">₹<span id="betShow">0</span></div>
+
+    </div>
+
+  </div>
+
+</div><!-- table -->
+
+</div><!-- app -->
+
+
+<!-- External JS -->
+<script src="game.js"></script>
+
+</body>
+</html>

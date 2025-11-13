@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect x="6" y="6" width="388" height="588" rx="28" ry="28" fill="#ffffff" stroke="#dcdcdc" />
+  <text x="34" y="84" font-family="DejaVu Sans" font-weight="800" fill="#0a0a0a" font-size="56">2</text>
+  <text x="34" y="128" font-family="DejaVu Sans" font-weight="700" fill="#0a0a0a" font-size="48">♣</text>
+  <text x="200" y="180" font-family="DejaVu Sans" font-weight="800" fill="#0a0a0a" font-size="48" text-anchor="middle">♣</text>
+  <text x="200" y="420" font-family="DejaVu Sans" font-weight="800" fill="#0a0a0a" font-size="48" text-anchor="middle">♣</text>
+</svg>

@@ -1,0 +1,301 @@
+/* ==========================================================
+   Sahil's Blackjack – Classic Poker Casino Styling
+   Cards: Real SVG Poker Deck
+   Chips: Realistic Casino PNGs
+   Table: Dark Felt + Soft Glow
+   ========================================================== */
+
+:root {
+    --bg: #040405;
+    --panel: #0b0f12;
+    --muted: #9aa6b3;
+    --felt: #0b0f12;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, system-ui, Arial;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--felt) url("assets/felt_highres.png");
+    background-size: cover;
+    background-blend-mode: multiply;
+    color: #f6fafb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 28px;
+}
+
+/* APP WRAPPER */
+.app {
+    width: 100%;
+    max-width: 1180px;
+
+    border-radius: 14px;
+    padding: 22px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(0, 0, 0, 0.08)
+    );
+
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 800;
+}
+
+header small {
+    color: var(--muted);
+}
+
+.meta {
+    display: flex;
+    gap: 18px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+/* TABLE LAYOUT */
+.table {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 18px;
+}
+
+/* PANELS */
+.panel {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.area-title {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+/* CARD AREA */
+.cards {
+    display: flex;
+    gap: 12px;
+    min-height: 130px;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+/* CARD ELEMENT */
+.card-wrap {
+    width: 92px;
+    height: 126px;
+    perspective: 900px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    transform-style: preserve-3d;
+
+    transition: transform 0.45s ease;
+}
+
+.card-wrap.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+
+    backface-visibility: hidden;
+}
+
+/* Front of Card – uses SVG poker card */
+.card-front {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Back of card */
+.card-back {
+    background: #0a2a2f;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: rotateY(180deg);
+}
+
+/* PLAYER HANDS */
+.hands {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hand {
+    padding: 10px 0;
+}
+
+.hand.active {
+    outline: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.hand-label {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.hand-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* BETTING PANEL */
+.bet-panel {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* CHIPS */
+.chips {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.chip {
+    width: 90px;
+    height: 60px;
+    border-radius: 999px;
+
+    background-size: cover;
+    background-position: center;
+
+    cursor: grab;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+    transition: transform 0.2s ease;
+}
+
+.chip:active {
+    transform: scale(0.95);
+}
+
+/* DROPZONE */
+.dropzone {
+    border: 2px dashed rgba(255, 255, 255, 0.09);
+    padding: 16px;
+    border-radius: 10px;
+
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--muted);
+    position: relative;
+}
+
+/* STACKED CHIPS */
+.bet-stack {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.stacked-chip {
+    position: absolute;
+    width: 90px;
+    height: 60px;
+    border-radius: 999px;
+
+    background-size: cover;
+    opacity: 0;
+    transform: scale(0.6);
+
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.stacked-chip.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.bet-display {
+    font-weight: 900;
+    font-size: 20px;
+    margin-top: 12px;
+    color: #e6fff8;
+}
+
+/* CONTROLS */
+.controls {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 16px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(255, 255, 255, 0.05);
+    color: #eafcff;
+
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    opacity: 0.35;
+}
+
+/* MAIN MESSAGE TEXT */
+.message {
+    margin-top: 14px;
+    font-size: 15px;
+    color: #c9d2df;
+}
