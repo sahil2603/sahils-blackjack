@@ -1,6 +1,7 @@
 // ===============================
 // Sahil's Blackjack – game.js
 // Classic Poker Cards + Real Chips + Insurance
+// With 3D CARD FLIP ANIMATION
 // ===============================
 
 const dealerCardsEl = document.getElementById("dealerCards");
@@ -24,7 +25,7 @@ const clearBtn = document.getElementById("clearBtn");
 const newBtn = document.getElementById("newBtn");
 
 // -------------------------------
-// SOUND EFFECTS (your WAV files)
+// SOUND EFFECTS
 // -------------------------------
 const sounds = {
   chip: new Audio("assets/sounds/chip-clink.wav"),
@@ -118,41 +119,48 @@ function computeTotal(cards) {
   return sum;
 }
 
+// ------------------------------------------
+// CARD RENDERER (3D FLIP ANIMATION)
+// ------------------------------------------
+function createCardElement(cardName) {
+    const card = document.createElement("div");
+    card.classList.add("card");
 
-// --------------------------------
-// CARD RENDERER (uses SVG cards)
-// --------------------------------
-function renderCardEl(card, hidden = false) {
-  const wrap = document.createElement("div");
-  wrap.className = "card-wrap";
+    // BACK of card
+    const back = document.createElement("div");
+    back.classList.add("card-face", "card-back");
 
-  const inner = document.createElement("div");
-  inner.className = "card-inner";
+    // FRONT of card
+    const front = document.createElement("div");
+    front.classList.add("card-face", "card-front");
+    front.style.backgroundImage = `url('assets/cards/${cardName}.png')`;
 
-  const front = document.createElement("div");
-  front.className = "card-face card-front";
+    card.appendChild(back);
+    card.appendChild(front);
 
-  const back = document.createElement("div");
-  back.className = "card-face card-back";
-
-  if (!hidden) {
-    const url = `assets/cards/${card}.svg`;
-    front.style.backgroundImage = `url("${url}")`;
-    front.style.backgroundSize = "cover";
-  }
-
-  inner.appendChild(front);
-  inner.appendChild(back);
-  wrap.appendChild(inner);
-
-  if (hidden) wrap.classList.add("flip");
-
-  return wrap;
+    return card;
 }
 
+// upgraded render that supports flip
+function renderCardEl(cardName, hideBack) {
+    const cardEl = createCardElement(cardName);
+
+    if (hideBack) {
+        // show card back (face down)
+        cardEl.classList.remove("flip");
+    } else {
+        // reveal with animation
+        setTimeout(() => {
+            cardEl.classList.add("flip");
+            playSound("flip");
+        }, 50);
+    }
+
+    return cardEl;
+}
 
 // --------------------------------
-// RENDER GAME STATE
+// RENDER ENTIRE GAME STATE
 // --------------------------------
 function render(showDealer = false) {
   // Dealer
@@ -162,7 +170,7 @@ function render(showDealer = false) {
     dealerCardsEl.appendChild(renderCardEl(c, hide));
   });
 
-  // Player Hands (supports split)
+  // Player Hands
   playerHandsEl.innerHTML = "";
 
   playerHands.forEach((hand, idx) => {
@@ -178,7 +186,11 @@ function render(showDealer = false) {
     const row = document.createElement("div");
     row.className = "hand-row";
 
-    for (const c of hand.cards) row.appendChild(renderCardEl(c, false));
+    // render each card
+    hand.cards.forEach((c, i) => {
+      const cardEl = renderCardEl(c, false);
+      row.appendChild(cardEl);
+    });
 
     const total = document.createElement("div");
     total.style.marginLeft = "12px";
@@ -194,9 +206,8 @@ function render(showDealer = false) {
   betShowEl.textContent = currentBet;
 }
 
-
 // --------------------------------
-// HELPER: CAN SPLIT?
+// CAN SPLIT?
 // --------------------------------
 function canSplit() {
   if (playerHands.length !== 1) return false;
@@ -204,7 +215,6 @@ function canSplit() {
   if (h.length !== 2) return false;
   return cardRank(h[0]) === cardRank(h[1]) && bankroll >= playerHands[0].bet;
 }
-
 
 // --------------------------------
 // START ROUND
@@ -221,7 +231,6 @@ function startRound() {
   deck = buildDeck();
   dealer = [draw(), draw()];
 
-  // One player hand (may split later)
   playerHands = [
     { cards: [draw(), draw()], bet: currentBet, settled: false, insurance: false }
   ];
@@ -230,7 +239,6 @@ function startRound() {
   insuranceOffered = false;
   insuranceBet = 0;
 
-  // Offer insurance if dealer shows ACE
   if (cardRank(dealer[0]) === "A") {
     insuranceOffered = true;
     insuranceBtn.disabled = false;
@@ -249,9 +257,8 @@ function startRound() {
   render(false);
 }
 
-
 // --------------------------------
-// INSURANCE (Standard Mode)
+// INSURANCE
 // --------------------------------
 function offerInsurance() {
   if (!insuranceOffered) {
@@ -275,11 +282,10 @@ function offerInsurance() {
 
   messageEl.textContent = "Insurance placed";
 
-  // Now check if dealer has real blackjack
   const dTotal = computeTotal(dealer);
 
   if (dTotal === 21) {
-    bankroll += insuranceBet * 3; // pays 2× + refund
+    bankroll += insuranceBet * 3;
     messageEl.textContent = "Dealer has Blackjack — Insurance pays!";
     playSound("win");
 
@@ -291,7 +297,6 @@ function offerInsurance() {
   messageEl.textContent = "Dealer no Blackjack — Insurance lost";
   insuranceOffered = false;
 }
-
 
 // --------------------------------
 // HIT
@@ -312,7 +317,6 @@ function hit() {
   }
 }
 
-
 // --------------------------------
 // STAND
 // --------------------------------
@@ -323,9 +327,8 @@ function stand() {
   advanceToNextHandOrDealer();
 }
 
-
 // --------------------------------
-// ADVANCE THROUGH SPLIT HANDS
+// NEXT HAND OR DEALER
 // --------------------------------
 function advanceToNextHandOrDealer() {
   const next = playerHands.findIndex((h, i) => i > activeHand && !h.settled);
@@ -344,7 +347,6 @@ function advanceToNextHandOrDealer() {
     dealerPlay();
   }
 }
-
 
 // --------------------------------
 // DOUBLE DOWN
@@ -368,7 +370,6 @@ function doubleDown() {
   render(false);
   advanceToNextHandOrDealer();
 }
-
 
 // --------------------------------
 // SPLIT
@@ -400,7 +401,6 @@ function doSplit() {
   messageEl.textContent = "Split created";
 }
 
-
 // --------------------------------
 // DEALER PLAY
 // --------------------------------
@@ -420,7 +420,6 @@ function dealerPlay() {
 
   setTimeout(step, 450);
 }
-
 
 // --------------------------------
 // FINISH ROUND
@@ -451,7 +450,6 @@ function finishRound() {
   dealBtn.disabled = false;
   render(true);
 }
-
 
 // --------------------------------
 // CHIP DRAG / CLICK BETTING
@@ -493,7 +491,6 @@ function createStackedChip(val) {
     playSound("stack");
   }, 30);
 }
-
 
 // CLICK ADD BET
 chipEls.forEach(chip => {
@@ -551,10 +548,7 @@ betZone.addEventListener("drop", e => {
   }
 });
 
-
-// --------------------------------
 // CLEAR BET
-// --------------------------------
 clearBtn.addEventListener("click", () => {
   bankroll += currentBet;
   currentBet = 0;
@@ -566,10 +560,7 @@ clearBtn.addEventListener("click", () => {
   messageEl.textContent = "Bet cleared";
 });
 
-
-// --------------------------------
-// NEW ROUND RESET
-// --------------------------------
+// NEW ROUND
 newBtn.addEventListener("click", () => {
   currentBet = 0;
   playerHands = [];
@@ -585,17 +576,13 @@ newBtn.addEventListener("click", () => {
   stackCnt = 0;
 });
 
-
-// --------------------------------
-// BUTTON EVENTS
-// --------------------------------
+// BUTTONS
 dealBtn.addEventListener("click", startRound);
 hitBtn.addEventListener("click", hit);
 standBtn.addEventListener("click", stand);
 doubleBtn.addEventListener("click", doubleDown);
 splitBtn.addEventListener("click", doSplit);
 insuranceBtn.addEventListener("click", offerInsurance);
-
 
 // Initial render
 render(false);
