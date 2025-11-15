@@ -133,7 +133,7 @@ function renderCardEl(cardName, hidden) {
 
     const front = document.createElement("div");
     front.className = "card-face card-front";
-    front.style.backgroundImage = `url("assets/cards/${cardName}.png")`;
+    front.style.backgroundImage = `url("assets/cards/${cardName}.svg")`;
 
     wrap.appendChild(back);
     wrap.appendChild(front);
