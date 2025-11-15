@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sahil's Blackjack — Classic Casino Edition</title>
+<title>Sahil's Blackjack — Premium Casino Edition</title>
 
 <link rel="stylesheet" href="style.css" />
 </head>
@@ -27,19 +27,21 @@
 
 <div class="table">
 
-  <!-- LEFT SIDE — GAME PLAY -->
+  <!-- LEFT SIDE — GAME AREA -->
   <div class="play-area">
 
-    <!-- Dealer Panel -->
+    <!-- ===== DEALER PANEL ===== -->
     <div class="panel">
       <div class="area-title">Dealer</div>
+
       <div id="dealerCards" class="cards dealer-cards"></div>
+
       <div id="dealerTotal" class="message">Total: —</div>
     </div>
 
     <div style="height:18px;"></div>
 
-    <!-- Player Panel -->
+    <!-- ===== PLAYER PANEL ===== -->
     <div class="panel">
       <div class="area-title">Player</div>
 
@@ -60,11 +62,11 @@
       <div class="message" id="message">Place a bet to begin.</div>
     </div>
 
-  </div>
+  </div> <!-- play-area -->
 
 
 
-  <!-- RIGHT SIDE — BETTING AREA -->
+  <!-- RIGHT SIDE — BETTING PANEL -->
   <div class="right-col">
 
     <div class="bet-panel">
@@ -72,17 +74,19 @@
       <div class="area-title">Chips (Drag or Click)</div>
 
       <div class="chips">
-        <div class="chip" data-value="10" 
-             style="background-image:url('assets/chips/chip-10.png')"></div>
 
-        <div class="chip" data-value="50" 
-             style="background-image:url('assets/chips/chip-50.png')"></div>
+        <div class="chip" data-value="10"
+          style="background-image:url('assets/chips/chip-10.png')"></div>
 
-        <div class="chip" data-value="100" 
-             style="background-image:url('assets/chips/chip-100.png')"></div>
+        <div class="chip" data-value="50"
+          style="background-image:url('assets/chips/chip-50.png')"></div>
 
-        <div class="chip" data-value="500" 
-             style="background-image:url('assets/chips/chip-500.png')"></div>
+        <div class="chip" data-value="100"
+          style="background-image:url('assets/chips/chip-100.png')"></div>
+
+        <div class="chip" data-value="500"
+          style="background-image:url('assets/chips/chip-500.png')"></div>
+
       </div>
 
       <div class="area-title" style="margin-top:12px;">Bet Area</div>
@@ -93,12 +97,14 @@
 
     </div>
 
-  </div>
+  </div> <!-- right-col -->
 
 </div><!-- table -->
 
 </div><!-- app -->
 
+
 <script src="game.js"></script>
+
 </body>
 </html>
