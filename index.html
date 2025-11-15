@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Sahil's Blackjack — Classic Casino Edition</title>
 
-<!-- External CSS -->
 <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -21,17 +20,17 @@
 
   <div class="meta">
     <div>Bankroll: ₹<span id="bankroll">1000</span></div>
-    <div>Bet: ₹<span id="currentBet">0</span></div>
+    <div>Bet: ₹<span id="betShow">0</span></div>
   </div>
 </header>
 
 
 <div class="table">
 
-  <!-- LEFT: GAME AREA -->
+  <!-- LEFT SIDE — GAME PLAY -->
   <div class="play-area">
 
-    <!-- Dealer -->
+    <!-- Dealer Panel -->
     <div class="panel">
       <div class="area-title">Dealer</div>
       <div id="dealerCards" class="cards dealer-cards"></div>
@@ -40,7 +39,7 @@
 
     <div style="height:18px;"></div>
 
-    <!-- Player -->
+    <!-- Player Panel -->
     <div class="panel">
       <div class="area-title">Player</div>
 
@@ -65,7 +64,7 @@
 
 
 
-  <!-- RIGHT: BETTING PANEL -->
+  <!-- RIGHT SIDE — BETTING AREA -->
   <div class="right-col">
 
     <div class="bet-panel">
@@ -100,9 +99,6 @@
 
 </div><!-- app -->
 
-
-<!-- External JS -->
 <script src="game.js"></script>
-
 </body>
 </html>
